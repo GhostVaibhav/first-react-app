@@ -1,0 +1,20 @@
+.color-palette {
+    display: flex;
+}
+.color-box {
+    margin: 1vmin;
+    height: 1.2vmax;
+    width: 1.2vmax;
+    border: 3px solid rgba(255,255,255,0.8);
+    border-radius: 100px;
+    cursor: pointer;
+}
+.red {
+    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+}
+.blue {
+    background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+}
+.green {
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+}

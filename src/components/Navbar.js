@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./Navbar.css";
 
 export default function Navbar(props) {
     return (
@@ -41,21 +42,27 @@ export default function Navbar(props) {
                             </a>
                         </li>
                     </ul>
-                    {/* <form className="d-flex">
-                        <input
-                            className="form-control me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                        <button
-                            className="btn btn-outline-success"
-                            type="submit"
-                        >
-                            Search
-                        </button>
-    </form> */}
-                    <div className={`form-check form-switch mx-3 text-${props.mode === 'light' ? 'dark' : 'light'}`}>
+                    <div className="color-palette" style={{
+                        display: props.mode === 'dark' ? 'flex' : 'none'
+                    }}>
+                        <div
+                            className="color-box red"
+                            onClick={()=>{props.changeColor("#821409")}}
+                        ></div>
+                        <div
+                            className="color-box green"
+                            onClick={()=>{props.changeColor("#347841")}}
+                        ></div>
+                        <div
+                            className="color-box blue"
+                            onClick={()=>{props.changeColor("#064f94")}}
+                        ></div>
+                    </div>
+                    <div
+                        className={`form-check form-switch mx-3 text-${
+                            props.mode === "light" ? "dark" : "light"
+                        }`}
+                    >
                         <input
                             className="form-check-input"
                             type="checkbox"
