@@ -10,6 +10,22 @@ export default function TextForm(props) {
     const changeText = (event) => {
         setText(event.target.value);
     };
+    const clearText = () => {
+        setText('');
+    };
+    const capitalText = () => {
+        let newText = text.split(' ');
+        for (let i = 0; i < newText.length; i++) {
+            newText[i] = newText[i].charAt(0).toUpperCase() + newText[i].slice(1);
+        }
+        setText(newText.join(' '));
+    };
+    const copyText = () => {
+        navigator.clipboard.writeText(text);
+    };
+    const removeExtraSpaces = () => {
+        setText(text.replace(/\s\s+/g, ' '));
+    };
     const [text, setText] = useState('');
     return (
         <>
@@ -20,6 +36,10 @@ export default function TextForm(props) {
             </div>
             <button className="btn btn-outline-primary mx-1" onClick={upperText}>Convert To Uppercase</button>
             <button className="btn btn-outline-primary mx-1" onClick={lowerText}>Convert To Lowercase</button>
+            <button className="btn btn-outline-primary mx-1" onClick={capitalText}>Convert To Capital Case</button>
+            <button className="btn btn-outline-primary mx-1" onClick={clearText}>Clear Text</button>
+            <button className="btn btn-outline-primary mx-1" onClick={copyText}>Copy Text</button>
+            <button className="btn btn-outline-primary mx-1" onClick={removeExtraSpaces}>Remove Extra Spaces</button>
         </div>
         <div className="container">
             <h2 className="my-3">Text analysis</h2>
