@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
     return (
@@ -8,9 +9,9 @@ export default function Navbar(props) {
             className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
         >
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" to="/">
                     {props.title}
-                </a>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -28,34 +29,60 @@ export default function Navbar(props) {
                 >
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a
-                                className="nav-link active"
+                            <Link
+                                className={`nav-link ${
+                                    props.link === props.homeText
+                                        ? "active"
+                                        : ""
+                                }`}
                                 aria-current="page"
-                                href="/"
+                                to="/"
+                                onClick={() => {
+                                    props.changeLink(props.homeText);
+                                }}
                             >
                                 {props.homeText}
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/">
+                            <Link
+                                className={`nav-link ${
+                                    props.link === props.aboutText
+                                        ? "active"
+                                        : ""
+                                }`}
+                                to="/about"
+                                onClick={() => {
+                                    props.changeLink(props.aboutText);
+                                }}
+                            >
                                 {props.aboutText}
-                            </a>
+                            </Link>
                         </li>
                     </ul>
-                    <div className="color-palette" style={{
-                        display: props.mode === 'dark' ? 'flex' : 'none'
-                    }}>
+                    <div
+                        className="color-palette"
+                        style={{
+                            display: props.mode === "dark" ? "flex" : "none",
+                        }}
+                    >
                         <div
                             className="color-box red"
-                            onClick={()=>{props.changeColor("#821409")}}
+                            onClick={() => {
+                                props.changeColor("#821409");
+                            }}
                         ></div>
                         <div
                             className="color-box green"
-                            onClick={()=>{props.changeColor("#347841")}}
+                            onClick={() => {
+                                props.changeColor("#347841");
+                            }}
                         ></div>
                         <div
                             className="color-box blue"
-                            onClick={()=>{props.changeColor("#064f94")}}
+                            onClick={() => {
+                                props.changeColor("#064f94");
+                            }}
                         ></div>
                     </div>
                     <div
