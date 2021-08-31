@@ -20,13 +20,15 @@ export default function TextForm(props) {
         let newText = text.split(" ");
         for (let i = 0; i < newText.length; i++) {
             newText[i] =
-            newText[i].charAt(0).toUpperCase() + newText[i].slice(1);
+                newText[i].charAt(0).toUpperCase() + newText[i].slice(1);
         }
         setText(newText.join(" "));
-        if (text.length > 0) props.alert("Converted to Capital Case!", "success");
+        if (text.length > 0)
+            props.alert("Converted to Capital Case!", "success");
     };
     const copyText = () => {
         navigator.clipboard.writeText(text);
+        document.getSelection().removeAllRanges();
         if (text.length > 0) props.alert("Copied text!", "success");
     };
     const removeExtraSpaces = () => {
@@ -54,47 +56,53 @@ export default function TextForm(props) {
                     ></textarea>
                 </div>
                 <button
+                    disabled={text.length === 0}
                     className={`btn btn-outline-${
                         props.mode === "light" ? "dark" : "light"
-                    } mx-1 my-2`}
+                    } mx-1 my-1`}
                     onClick={upperText}
                 >
                     Convert To Uppercase
                 </button>
                 <button
+                    disabled={text.length === 0}
                     className={`btn btn-outline-${
                         props.mode === "light" ? "dark" : "light"
-                    } mx-1 my-2`}
+                    } mx-1 my-1`}
                     onClick={lowerText}
                 >
                     Convert To Lowercase
                 </button>
                 <button
+                    disabled={text.length === 0}
                     className={`btn btn-outline-${
                         props.mode === "light" ? "dark" : "light"
-                    } mx-1 my-2`}
+                    } mx-1 my-1`}
                     onClick={capitalText}
                 >
                     Convert To Capital Case
                 </button>
                 <button
+                    disabled={text.length === 0}
                     className={`btn btn-outline-${
                         props.mode === "light" ? "dark" : "light"
-                    } mx-1 my-2`}
+                    } mx-1 my-1`}
                     onClick={copyText}
                 >
                     Copy Text
                 </button>
                 <button
+                    disabled={text.length === 0}
                     className={`btn btn-outline-${
                         props.mode === "light" ? "dark" : "light"
-                    } mx-1 my-2`}
+                    } mx-1 my-1`}
                     onClick={removeExtraSpaces}
                 >
                     Remove Extra Spaces
                 </button>
                 <button
-                    className="btn btn-outline-danger mx-1 my-2"
+                    disabled={text.length === 0}
+                    className="btn btn-danger mx-1 my-1"
                     onClick={clearText}
                 >
                     Clear Text
@@ -107,13 +115,23 @@ export default function TextForm(props) {
             >
                 <h2 className="my-3">Text analysis</h2>
                 <p>
-                    {text.length ? text.split(" ").length : 0} words and{" "}
-                    {text.length} characters written
+                    {text.length
+                        ? text.split(" ").filter((element) => {
+                              return element.length;
+                          }).length
+                        : 0}{" "}
+                    words and {text.length} characters written
                 </p>
                 <p>
                     Time taken to read the sentence (in seconds) :{" "}
                     {Math.round(
-                        (text.length ? text.split(" ").length : 0) * 0.008 * 60
+                        (text.length
+                            ? text.split(" ").filter((element) => {
+                                  return element.length;
+                              }).length
+                            : 0) *
+                            0.008 *
+                            60
                     )}
                 </p>
                 <h2 className="my-3">Preview</h2>
