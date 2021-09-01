@@ -7,9 +7,17 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
     const [mode, setMode] = useState("light");
+    const [toggleState, setToggleState] = useState(false);
     const [modeText, setModeText] = useState("Enable Dark Mode");
     const [alert, setAlert] = useState(null);
     const [link, setLink] = useState('Home');
+    window.onload = () => {
+        if(localStorage.getItem("theme"))
+            if(localStorage.getItem("theme") === "dark")
+                toggleMode();
+        else
+            localStorage.setItem("theme", "light");
+    }
     const showAlert = (message, type) => {
         setAlert({
             message: message,
@@ -22,14 +30,18 @@ function App() {
     const toggleMode = () => {
         if (mode === "light") {
             setModeText("Disable Dark Mode");
+            setToggleState(true);
             setMode("dark");
             document.body.style.backgroundColor = "#303538";
-            showAlert("Dark mode has been enabled!", "success");
+            if(localStorage.getItem("theme") !== "dark") showAlert("Dark mode has been enabled!", "success");
+            localStorage.setItem("theme", "dark");
         } else {
             setModeText("Enable Dark Mode");
+            setToggleState(false);
             setMode("light");
             document.body.style.backgroundColor = "white";
             showAlert("Dark mode has been disabled!", "success");
+            localStorage.setItem("theme", "light");
         }
     };
     const changeColor = (color) => {
@@ -52,6 +64,7 @@ function App() {
                 changeColor={changeColor}
                 link={link}
                 changeLink={changeLink}
+                toggleState={toggleState}
             />
             <Alert alert={alert} />
             <div className="container">

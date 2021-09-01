@@ -116,7 +116,7 @@ export default function TextForm(props) {
                 <h2 className="my-3">Text analysis</h2>
                 <p>
                     {text.length
-                        ? text.split(" ").filter((element) => {
+                        ? text.split(/\s+/).filter((element) => {
                               return element.length;
                           }).length
                         : 0}{" "}
@@ -126,7 +126,7 @@ export default function TextForm(props) {
                     Time taken to read the sentence (in seconds) :{" "}
                     {Math.round(
                         (text.length
-                            ? text.split(" ").filter((element) => {
+                            ? text.split(/\s+/).filter((element) => {
                                   return element.length;
                               }).length
                             : 0) *
