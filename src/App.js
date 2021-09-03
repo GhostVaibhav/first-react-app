@@ -17,6 +17,11 @@ function App() {
                 toggleMode();
         else
             localStorage.setItem("theme", "light");
+        if(localStorage.getItem("highlightedLink"))
+            if(localStorage.getItem("highlightedLink") === "About")
+                setLink("About");
+        else
+            localStorage.setItem("highlightedLink", "Home");
     }
     const showAlert = (message, type) => {
         setAlert({
@@ -50,6 +55,7 @@ function App() {
     };
     const changeLink = (link) => {
         setLink(link);
+        localStorage.setItem("highlightedLink", link);
     }
     return (
         <>
