@@ -17,7 +17,7 @@ export default function TextForm(props) {
         if (text.length > 0) props.alert("Cleared text", "success");
     };
     const capitalText = () => {
-        let newText = text.split(" ");
+        let newText = text.toLowerCase().split(" ");
         for (let i = 0; i < newText.length; i++) {
             newText[i] =
                 newText[i].charAt(0).toUpperCase() + newText[i].slice(1);
